@@ -35,7 +35,7 @@ The `j1708config` command is useful for adjusting the display and the gateway po
 j1708config <port> -h
 ```
 
-<p align="center"><img src="images/j1708config-help.gif" alt="Configuration-Help" width="550"/></p>
+<p align="center"><img src="images/j1708config-help.gif" alt="Configuration-Help" width="700"/></p>
 
 ### Display Settings
 For example, to adjust the display settings back to default use the following command.
@@ -44,7 +44,7 @@ For example, to adjust the display settings back to default use the following co
 j1708config <port> -s -d
 ```
 
-<p align="center"><img src="images/j1708config-default.gif" alt="Configuration-Default" width="550"/></p>
+<p align="center"><img src="images/j1708config-default.gif" alt="Configuration-Default" width="700"/></p>
 
 ### Network Statistics and Errors
 Basic messaging statistics are tracked by the gateway port. To view them enter the following command:
@@ -67,7 +67,7 @@ To send a simple 4-byte message on port three, use the following command:
 j1708send sp3 4 de.ed.be.ef
 ```
 
-<p align="center"><img src="images/j1708config-send.gif" alt="Configuration-Send" width="550"/></p>
+<p align="center"><img src="images/j1708config-send.gif" alt="Configuration-Send" width="700"/></p>
 
 ### Transport Protocol
 SAE J1587 provides rules for transporting payloads greater than 19-bytes. Every `J1708` object has built-in processing and handling procedures for RTS, CTS, CDP, EOM, and Abort messages. This will only work when gateway processing is turned on. To send a large payload used the `-T` option of `j1708send`.
