@@ -289,6 +289,9 @@ bool J1708::J1708Tx(uint8_t J1708TxData[], const uint8_t &TxFrameLength, const u
 
 bool J1708::J1708Send(uint8_t J1708TxData[], const int &TxFrameLength, const int &TxFramePriority){
   if (N_TxQ_Total < TxQmax){
+    if (TxQueuePenalty > 0){
+      TxQueuePenalty--;
+    }
     if (N_TxS==TxQmax-1){
       memcpy(J1708TxQ[N_TxS], J1708TxData, TxFrameLength);
       J1708TxQLengths[N_TxS] = TxFrameLength;
@@ -312,6 +315,9 @@ bool J1708::J1708Send(uint8_t J1708TxData[], const int &TxFrameLength, const int
     ERR3_Tx_Overflow = true;
     ERR_Counter++;
     ERR3_Counter++;
+    if (TxQueuePenalty < TxQmaxMaxPenalty){
+      TxQueuePenalty ++;
+    }
     if (ShowErrors){
       Serial.print("ERR3:");
       Serial.print("[");Serial.print(ERR_Counter);Serial.println("] ");
@@ -920,7 +926,7 @@ void J1708::J1708Listen(){
     //Check if a message is in the middle of being received (ie is the line idle?)
     if (!rx_busy){
       uint8_t priority = J1708TxQPriorities[N_TxQ];
-      if (J1708TxTimer > twelvebit+(onebit*priority*2)){
+      if (J1708TxTimer > (twelvebit+(onebit*priority*2)) + TxQueuePenalty*PenaltyTime){
         // Transport CTS Messages (queue #1)
         if (Q_flag){
           uint8_t Q_Message[Q_Lengths[Q_Counter]] = {};
@@ -949,7 +955,7 @@ void J1708::J1708Listen(){
             N_TxQ_Total--;
             //Serial.print("After: N_TxQ:");Serial.print(N_TxQ);Serial.print(",N_TxQ_Total:");Serial.println(N_TxQ_Total);
           }
-          else {
+          else if (N_TxQ>=0){
             // uint8_t J1708TxBuffer[J1708TxQLengths[N_TxQ]];
             // for (int i=0;i<J1708TxQLengths[N_TxQ];i++){
             //   J1708TxBuffer[i] = J1708TxQ[N_TxQ][i];
@@ -1431,6 +1437,7 @@ bool J1708::J1708Settings(String &command){
         Serial.print("Self_MID:");Serial.println(selfMID);
         Serial.print("Max_Busload:");Serial.println(maxBusload);
         Serial.print("Max_MID%:");Serial.println(maxMIDShare);
+        Serial.print("TxBucketSize:");Serial.println(TxQmax);
         if (selfHostPort){
           Serial.print("Host_Port:");Serial.println("True");
         }

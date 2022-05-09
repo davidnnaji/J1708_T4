@@ -93,9 +93,14 @@ struct J1708 {
   uint8_t selfMID = 120;            //0x78 - Change this to define the gateway MID
   nodeMode selfMode = Gateway;
   bool selfHostPort = false;
+  uint32_t ERR7_Limit = 256;        //65,535 (2-bytes) Max
   float maxBusload = 1.0;           //Don't forget to add "."
   float maxMIDShare = 1.0;          //Don't forget to add "."
   bool GatewaySpecificProcessing = false; //Allows the gateway to respond to requests (false means it will only perform normal fucntionality)
+  int TxQmax = 32;  // Indicates TxQueue size. Can be used to size the leaky bucket 32 MAX
+  uint8_t TxQueuePenalty = 0;
+  const static uint8_t TxQmaxMaxPenalty = 1; 
+  const static uint32_t PenaltyTime = 1000; // Leaky Bucket: P = PenaltyTime*TxQueuePenalty microseconds
 
   //Variables
   uint32_t idleTime = 1250;
@@ -126,7 +131,6 @@ struct J1708 {
   uint32_t ERR6_ConsecutiveCounter = 0;
   uint8_t ERR6_ConsecutiveMax = 4; // approx. n/2 seconds of consecutive high busload
   uint32_t ERR7_Counter = 0; // Spoofed Message Error
-  const uint32_t ERR7_Limit = 256;  //65,535 (2-bytes) Max
   uint16_t ERR7_IDCounter[256];
   uint16_t ERR8_Counter = 0; // Rogue Node Detected Error
   const static int ERR8_Interval = 10000;
@@ -142,7 +146,6 @@ struct J1708 {
   uint8_t N_TxQ = 0;
   uint8_t N_TxS = 0;
   uint8_t N_TxQ_Total = 0;
-  const static int TxQmax = 32;
   int selfPN;
 
   // Timing Constants (microseconds)
@@ -156,9 +159,9 @@ struct J1708 {
   //Global Buffers & Arrays
   const static int RxBufferSize = 22;
   uint8_t J1708RxBuffer[RxBufferSize]; //Buffer for unprinted Rx frames
-  uint8_t J1708TxQ[TxQmax][21];        //Buffer for queued Tx frames
-  int J1708TxQLengths[TxQmax];     //Buffer for queued Tx frame lengths
-  uint8_t J1708TxQPriorities[TxQmax];  //Buffer for queued Tx frame priorities
+  uint8_t J1708TxQ[32][21];        //Buffer for queued Tx frames
+  int J1708TxQLengths[32];     //Buffer for queued Tx frame lengths
+  uint8_t J1708TxQPriorities[32];  //Buffer for queued Tx frame priorities
   char hexDisp[4]; //Character display buffer
   uint8_t TP_Tx_Buffer[256] = {}; //Transport Protocol Buffer
   uint8_t TP_Rx_Buffer[256] = {}; //Transport Protocol Buffer
