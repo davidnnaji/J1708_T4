@@ -24,10 +24,10 @@ The entire library revolves around a `J1708` object that is intended to represen
 
 One object is enough for interacting with the bus. Two objects can be linked together to create a simple passthrough gateway. The example script, `simpleGateway.ino`, should provide enough information to get acquainted with instantiating an object and linking multiple objects. The following component diagram provides the exact architecture of the example script. 
 
-![Gateway Architecture Component Diagram](images/gateway-arch-com-dia.png "Gateway Architecture Component Diagram")
+<p align="center"><img src="images/gateway-arch-com-dia.png" alt="Gateway Architecture Component Diagram" width="500"/></p>
 
 # Serial API Usage
-## `j1708config`
+## Runtime Configuration
 ### Help
 The `j1708config` command is useful for adjusting the display and the gateway port settings during runtime. You can bring up the help page with the following command to see the available options.
 
@@ -55,9 +55,9 @@ j1708config <port> -s -s
 
 Typical network and messaging errors are also tracked. Below is table for reference.
 
-<center><img src="images/error-table.png" alt="Error Table" width="300"/></center>
+<p align="center"><img src="images/error-table.png" alt="Error Table" width="300"/></p>
 
-## `j1708send`
+## Sending J1708 Messages
 `j1708send` is useful for sending traffic to the network using a specific port during run-time. Use the `-h` option for more information.
 
 ### Standard Message
@@ -69,10 +69,10 @@ j1708send sp3 4 de.ed.be.ef
 
 ![Configuration-Send](images/j1708config-send.gif "Configuration-Send")
 
-### Transport Protocol `-T`
-SAE J1587 provides rules for transporting payloads greater than 19-bytes. Every `J1708` object has built-in processing and handling procedures for RTS, CTS, CDP, EOM, and Abort messages. This will only work when gateway processing is turned on.
+### Transport Protocol
+SAE J1587 provides rules for transporting payloads greater than 19-bytes. Every `J1708` object has built-in processing and handling procedures for RTS, CTS, CDP, EOM, and Abort messages. This will only work when gateway processing is turned on. To send a large payload used the `-T` option of `j1708send`.
 
-To send a simple 30-byte message on port three, use the following command:
+For example, to send a simple 30-byte message on port three, use the following command:
 
 ```
 j1708send sp3 -T 30 de.ed.be.ef.de.ed.be.ef.de.ed.be.ef.de.ed.be.ef.de.ed.be.ef.de.ed.be.ef.de.ed.be.ef.de.ad
@@ -96,7 +96,7 @@ myTeensy.close()
 [MS Thesis]()
 
 # Limitations 
-I am a mechanical engineer doing programmer things. After writing this, I learned *how to* and *how to not* do stuff in C/C++. Bear in mind, even though my code has been unit tested, reviewed, and deployed on actual vehicle hardware, my code would certainly benefit from many more improvements. If you are interested in improving the work, feel free to start an issue or reach out to me anytime!
+I'm a mechanical engineer doing programmer things. After writing this, I learned *how to* and *how to not* do stuff in C/C++. Bear in mind, even though my code has been unit tested, reviewed, and deployed on actual vehicle hardware, my code would certainly benefit from many more improvements. If you are interested in contributing, feel free to start an issue or reach out to me anytime!
 
 
 > ⚠️ **TL;DR** Be warned - the performance of this library is limited.
