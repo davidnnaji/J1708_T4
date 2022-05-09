@@ -24,7 +24,7 @@ The entire library revolves around a `J1708` object that is intended to represen
 
 One object is enough for interacting with the bus. Two objects can be linked together to create a simple passthrough gateway. The example script, `simpleGateway.ino`, should provide enough information to get acquainted with instantiating an object and linking multiple objects. The following component diagram provides the exact architecture of the example script. 
 
-<p align="center"><img src="images/gateway-arch-com-dia.png" alt="Gateway Architecture Component Diagram" width="500"/></p>
+<p align="center"><img src="images/gateway-arch-com-dia.png" alt="Gateway Architecture Component Diagram" width="550"/></p>
 
 # Serial API Usage
 ## Runtime Configuration
@@ -35,7 +35,7 @@ The `j1708config` command is useful for adjusting the display and the gateway po
 j1708config <port> -h
 ```
 
-![Configuration-Help](images/j1708config-help.gif "Configuration-Help")
+<p align="center"><img src="images/j1708config-help.gif" alt="Configuration-Help" width="550"/></p>
 
 ### Display Settings
 For example, to adjust the display settings back to default use the following command.
@@ -44,7 +44,7 @@ For example, to adjust the display settings back to default use the following co
 j1708config <port> -s -d
 ```
 
-![Configuration-Default](images/j1708config-default.gif "Configuration-Default")
+<p align="center"><img src="images/j1708config-default.gif" alt="Configuration-Default" width="550"/></p>
 
 ### Network Statistics and Errors
 Basic messaging statistics are tracked by the gateway port. To view them enter the following command:
@@ -55,7 +55,7 @@ j1708config <port> -s -s
 
 Typical network and messaging errors are also tracked. Below is table for reference.
 
-<p align="center"><img src="images/error-table.png" alt="Error Table" width="300"/></p>
+<p align="center"><img src="images/error-table.png" alt="Error Table" width="550"/></p>
 
 ## Sending J1708 Messages
 `j1708send` is useful for sending traffic to the network using a specific port during run-time. Use the `-h` option for more information.
@@ -67,7 +67,7 @@ To send a simple 4-byte message on port three, use the following command:
 j1708send sp3 4 de.ed.be.ef
 ```
 
-![Configuration-Send](images/j1708config-send.gif "Configuration-Send")
+<p align="center"><img src="images/j1708config-send.gif" alt="Configuration-Send" width="550"/></p>
 
 ### Transport Protocol
 SAE J1587 provides rules for transporting payloads greater than 19-bytes. Every `J1708` object has built-in processing and handling procedures for RTS, CTS, CDP, EOM, and Abort messages. This will only work when gateway processing is turned on. To send a large payload used the `-T` option of `j1708send`.
