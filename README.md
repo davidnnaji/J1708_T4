@@ -22,14 +22,14 @@ You can refer to the official standard or my own circuit implementation for insp
 # Design
 The entire library revolves around a `J1708` object that is intended to represent a single port connection to the bus. This object is logically bound to a Teensy serial port on the of the users choice. All example use ports 3 and 4 by default to help avoid conflicts. 
 
-One object is enough for interacting with the bus. Two objects can be linked together to create a simple passthrough gateway. The example script, `simpleGateway.ino`, should provide enough information to get acquainted with instantiating an object and linking multiple objects. The following component diagram provides the exact architecture of the example script. 
+One object is enough for interacting with the bus. Two objects can be linked together to create a simple network passthrough. The example script, `simplePass.ino`, should provide enough information to get acquainted with instantiating an object and linking multiple objects. The following component diagram provides the exact architecture of the example script. 
 
 <p align="center"><img src="images/gateway-arch-com-dia.png" alt="Gateway Architecture Component Diagram" width="550"/></p>
 
 # Serial API Usage
 ## Runtime Configuration
 ### Help
-The `j1708config` command is useful for adjusting the display and the gateway port settings during runtime. You can bring up the help page with the following command to see the available options.
+The `j1708config` command is useful for adjusting the display and the device port settings during runtime. You can bring up the help page with the following command to see the available options.
 
 ```
 j1708config <port> -h
@@ -47,7 +47,7 @@ j1708config <port> -s -d
 <p align="center"><img src="images/j1708config-default.gif" alt="Configuration-Default" width="700"/></p>
 
 ### Network Statistics and Errors
-Basic messaging statistics are tracked by the gateway port. To view them enter the following command:
+Basic messaging statistics are tracked by any instatiated port automatically. To view them, enter the following command:
 
 ```
 j1708config <port> -s -s
@@ -70,7 +70,7 @@ j1708send sp3 4 de.ed.be.ef
 <p align="center"><img src="images/j1708config-send.gif" alt="Configuration-Send" width="700"/></p>
 
 ### Transport Protocol
-SAE J1587 provides rules for transporting payloads greater than 19-bytes. Every `J1708` object has built-in processing and handling procedures for RTS, CTS, CDP, EOM, and Abort messages. This will only work when gateway processing is turned on. To send a large payload used the `-T` option of `j1708send`.
+SAE J1587 provides rules for transporting payloads greater than 19-bytes. Every `J1708` object has built-in processing and handling procedures for RTS, CTS, CDP, EOM, and Abort messages. This will only work when port processing is turned on. To send a large payload used the `-T` option of `j1708send`.
 
 For example, to send a simple 30-byte message on port three, use the following command:
 
