@@ -1,5 +1,5 @@
 /*
-  simpleGateway.ino
+  simplePass.ino
   Written by David Nnaji @ Colorado State University, April 21st, 2022
 
   Github:
@@ -7,7 +7,7 @@
     Do you find this library useful? Let me know online!
 
   Description:
-    Run-time script for a simple two-port J1708 gateway.
+    Run-time script for a simple two-port J1708 passthrough.
     You can also use this code for simple RX and TX on a J1708 bus.
     For configuration during run-time type "j1708config sp3 -h" for help
     To send messages type "j1708send sp3 -h" for help
