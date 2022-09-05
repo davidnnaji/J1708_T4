@@ -93,7 +93,7 @@ myTeensy.close()
 
 [SAE J1587 - Official Standard](https://www.sae.org/standards/content/j1587_201301)
 
-[MS Thesis]()
+[MS Thesis] - (Currently embargoed. To be published 8/22/23)
 
 # Limitations 
 I'm a mechanical engineer doing programmer things. After writing this, I learned *how to* and *how to not* do stuff in C/C++. Bear in mind, even though my code has been unit tested, reviewed, and deployed on actual vehicle hardware, my code would certainly benefit from many more improvements. If you are interested in contributing, feel free to start an issue or reach out to me anytime!
