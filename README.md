@@ -1,7 +1,7 @@
 ![Repo Views Counter](https://komarev.com/ghpvc/?username=davidnnaji&color=blue&label=Page+Views)
 
 # Overview
-**J1708_T4** is a gateway utility library that is compatible with the Teensy 4.x. It provides basic tools for displaying, measuring, and sending traffic on an SAE J1708 bus. This code was written as part of my [Master's Thesis](#References) on securing legacy HD networks.
+**J1708_T4** is a gateway utility library that is compatible with the [Teensy 4.x](https://www.pjrc.com/store/teensy40.html). It provides basic tools for displaying, measuring, and sending traffic on an SAE J1708 bus. This code was written as part of my [Master's Thesis](#References) on securing legacy HD networks.
 
 # Manual Installation
 To install the library manually, you'll need to download it as a .zip file, extract it and put in the proper Arduino user library directory. The .zip file contains all you need, including a few examples on how to use it. If the library is installed properly, you should be able to see these examples in `File>Examples>J1708_T4`. 
